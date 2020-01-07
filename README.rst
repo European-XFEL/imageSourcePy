@@ -1,6 +1,6 @@
-******************************
-CameraDevicePy Device (Python)
-******************************
+*****************************
+ImageSourcePy Device (Python)
+*****************************
 
 Testing
 =======
@@ -16,14 +16,14 @@ Simply type:
 in the directory of where the ``setup.py`` file is located, or use the ``karabo``
 utility script:
 
-``karabo develop cameraDevicePy``
+``karabo develop imageSourcePy``
 
 Running
 =======
 
 If you want to manually start a server using this device, simply type:
 
-``karabo-pythonserver serverId=pythonServer/1 deviceClasses=CameraDevicePy``
+``karabo-pythonserver serverId=pythonServer/1 deviceClasses=ImageSource``
 
 Or just use (a properly configured):
 
