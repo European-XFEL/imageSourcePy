@@ -12,7 +12,7 @@ def _get_version_string():
 
     return get_package_version(dirname(__file__))
 
-setup(name='cameraDevicePy',
+setup(name='imageSource',
       version=_get_version_string(),
       author='parenti',
       author_email='parenti',
@@ -21,11 +21,7 @@ setup(name='cameraDevicePy',
       url='',
       package_dir={'': 'src'},
       packages=find_packages('src'),
-      entry_points={
-          'karabo.bound_device': [
-              'CameraDevicePy = cameraDevicePy.CameraDevicePy:CameraDevicePy',
-          ],
-      },
+      entry_points={},
       package_data={},
       requires=[],
       )
