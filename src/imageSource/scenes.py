@@ -12,34 +12,7 @@ from karabo.common.scenemodel.api import (
 )
 
 
-def get_base_scene(device_id):
-    scene0 = RectangleModel(
-        height=510.0, stroke='#000000', width=600.0, x=5.0, y=15.0)
-    scene1 = LabelModel(
-        font='Sans Serif,11,-1,5,75,0,0,0,0,0', foreground='#000000',
-        height=27.0, parent_component='DisplayComponent', text='DeviceID',
-        width=74.0, x=16.0, y=31.0)
-    scene2 = EvaluatorModel(
-        expression="x.split('/')[-1]", height=27.0,
-        keys=[f'{device_id}.deviceId'], parent_component='DisplayComponent',
-        width=480.0, x=110.0, y=31.0)
-    scene3 = DisplayStateColorModel(
-        height=30.0, keys=[f'{device_id}.state'],
-        parent_component='DisplayComponent', width=480.0, x=110.0, y=65.0)
-    scene4 = DisplayLabelModel(
-        height=30.0, keys=[f'{device_id}.state'],
-        parent_component='DisplayComponent', width=480.0, x=110.0, y=65.0)
-    scene5 = WebCamGraphModel(
-        colormap='viridis', height=450.0,
-        keys=[f'{device_id}.output.schema.data.image'],
-        parent_component='DisplayComponent', width=480.0, x=90.0, y=85.0)
-    scene = SceneModel(
-        height=540.0, width=637.0, children=[scene0, scene1, scene2, scene3,
-                                             scene4, scene5])
-    return write_scene(scene)
-
-
-def get_camera_scene(device_id):
+def get_scene(device_id):
     scene0 = RectangleModel(
         height=452.0, stroke='#000000', width=814.0, x=6.0, y=16.0)
     scene1 = LabelModel(
