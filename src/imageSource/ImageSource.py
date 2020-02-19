@@ -6,12 +6,8 @@
 
 from karabo.bound import (
     DaqDataType, Hash, ImageData, IMAGEDATA_ELEMENT, KARABO_CLASSINFO,
-    NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema, VECTOR_STRING_ELEMENT
+    NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema
 )
-
-from karabo.common.api import KARABO_SCHEMA_DISPLAY_TYPE_SCENES as DT_SCENES
-
-from .scenes import get_base_scene, get_camera_scene
 
 
 @KARABO_CLASSINFO("ImageSource", "2.7")
@@ -54,10 +50,6 @@ class ImageSource(PythonDevice):
             .dataSchema(output_data)
             .commit(),
 
-            VECTOR_STRING_ELEMENT(expected).key('availableScenes')
-            .setSpecialDisplayType(DT_SCENES)
-            .readOnly().initialValue(['scene'])
-            .commit()
         )
 
     def __init__(self, configuration):
@@ -139,36 +131,3 @@ class ImageSource(PythonDevice):
         # NB DAQ wants shape in CImg order, eg (width, height)
         data = data.reshape(*reversed(data.shape))
         write_channel('daqOutput')
-
-    def get_scene(self, device_id):
-        return get_base_scene(device_id)
-
-    def requestScene(self, params):
-        """Fulfill a scene request from another device.
-
-         NOTE: Required by Scene Supply Protocol, which is defined in KEP 21.
-               The format of the reply is also specified there.
-
-        :param params: A `Hash` containing the method parameters
-        """
-        payload = Hash('success', False)
-
-        name = params.get('name', default='')
-        if name == 'scene':
-            payload.set('success', True)
-            payload.set('name', name)
-            payload.set('data', self.get_scene(self.getInstanceId()))
-        self.reply(Hash('type', 'deviceScene', 'origin', self.getInstanceId(),
-                        'payload', payload))
-
-
-@KARABO_CLASSINFO("CameraImageSource", "2.7")
-class CameraImageSource(ImageSource):
-    """
-    Base class for camera devices.
-
-    It is derived from the ImageSource class.
-    """
-
-    def get_scene(self, device_id):
-        return get_camera_scene(device_id)
