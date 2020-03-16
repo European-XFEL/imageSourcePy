@@ -30,6 +30,11 @@ class CameraImageSource(ImageSource):
             .commit()
         )
 
+    def __init__(self, configuration):
+        # always call PythonDevice constructor first!
+        super(CameraImageSource, self).__init__(configuration)
+        self.KARABO_SLOT(self.requestScene)
+
     def requestScene(self, params):
         """Fulfill a scene request from another device.
 

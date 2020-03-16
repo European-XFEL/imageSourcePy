@@ -52,11 +52,6 @@ class ImageSource(PythonDevice):
 
         )
 
-    def __init__(self, configuration):
-        # always call PythonDevice constructor first!
-        super(ImageSource, self).__init__(configuration)
-        self.KARABO_SLOT(self.requestScene)
-
     def update_output_schema(self, shape, encoding, k_type):
         """
         Update the schema of 'output' and 'daqOutput' channels
