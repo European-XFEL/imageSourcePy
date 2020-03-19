@@ -93,7 +93,7 @@ class ImageSource(PythonDevice):
         self.appendSchema(schema_update)
 
     def write_channels(self, data, binning=None, bpp=None, encoding=None,
-                       roi_offsets=None, timestamp=None):
+                       roi_offsets=None, timestamp=None, header=None):
         """
         Write an image to 'output' and 'daqOutput' channels
 
@@ -104,6 +104,7 @@ class ImageSource(PythonDevice):
         :param roi_offsets: the ROI offset, e.g. (0, 0)
         :param timestamp: the image timestamp - if none the current timestamp
         will be used
+        :param header: the image header
         :return:
         """
 
@@ -117,6 +118,8 @@ class ImageSource(PythonDevice):
                 image_data.setEncoding(encoding)
             if roi_offsets:
                 image_data.setROIOffsets(roi_offsets)
+            if header:
+                image_data.setHeader(header)
             self.writeChannel(node_key, Hash("data.image", image_data),
                               timestamp)
 
