@@ -16,14 +16,17 @@ class ImageSource(PythonDevice):
     Base class for image sources.
 
     It provides two output channels - 'output' and 'daqOutput' - for sending
-    out images, and two functions - 'update_output_schema' and
-    'write_channels'.
+    out images, and three functions - 'update_output_schema', 'write_channels'
+    and 'signal_eos'.
 
     The function 'update_output_schema' will update the schema for the output
     channels and make it fit for the DAQ.
 
     The function 'write_channels' will write the input data to both the
     output channels, taking care of reshaping them for the DAQ.
+
+    The function 'signal_eos' will send an end-of-stream signal to both the
+    output channels.
     """
 
     @staticmethod
@@ -129,3 +132,13 @@ class ImageSource(PythonDevice):
         # NB DAQ wants shape in CImg order, eg (width, height)
         data = data.reshape(*reversed(data.shape))
         write_channel('daqOutput')
+
+    def signal_eos(self):
+        """
+        Send an end-of-stream signal to 'output' and 'daqOutput' channels
+
+        :return:
+        """
+
+        self.signalEndOfStream("output")
+        self.signalEndOfStream("daqOutput")
