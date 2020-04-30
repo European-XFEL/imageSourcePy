@@ -5,12 +5,16 @@
 
 .. _welcome:
 
-Welcome to ImageSourcePy's documentation!
-=========================================
+======================
+Library: ImageSourcePy
+======================
 
 Contents:
 
 .. toctree::
+   utils
+   image_source
+   camera_image_source
    :maxdepth: 2
 
 

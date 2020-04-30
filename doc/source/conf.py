@@ -17,9 +17,17 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import subprocess
+import sys
+
+from rtd_conf import global_conf
+
+# Copy source files to temporary location, and by doing so prepend to them
+# future_fstrings coding
+subprocess.call(["./preprocessor.py", "../../src", "../build/tmp"])
+
+sys.path.insert(0, os.path.abspath('../build/tmp'))
 
 # -- General configuration ------------------------------------------------
 
@@ -31,6 +39,7 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
@@ -345,4 +354,5 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+#intersphinx_mapping = {'https://docs.python.org/': None}
+# We've already set this in global_conf. Don't set it here
