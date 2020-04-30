@@ -105,7 +105,7 @@ class ImageSource(PythonDevice):
         :param bpp: the bits-per-pixel, e.g. 12
         :param encoding: the image encoding, e.g. Encoding.GRAY
         :param roi_offsets: the ROI offset, e.g. (0, 0)
-        :param timestamp: the image timestamp - if none the current timestamp
+        :param timestamp: the image timestamp - if none the current timestamp\
         will be used
         :param header: the image header
         :return:

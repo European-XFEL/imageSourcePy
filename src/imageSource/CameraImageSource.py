@@ -18,7 +18,7 @@ class CameraImageSource(ImageSource):
     """
     Base class for camera devices.
 
-    It is derived from the ImageSource class.
+    It is derived from the ImageSource class, and provides a default scene.
     """
 
     @staticmethod
