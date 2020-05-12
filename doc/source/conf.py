@@ -21,7 +21,10 @@ import os
 import subprocess
 import sys
 
-from rtd_conf import global_conf
+# XXX temporary use local rtd_conf
+sys.path.insert(0, os.path.abspath('rtd_conf_local'))
+import global_conf
+# from rtd_conf import global_conf
 
 # Copy source files to temporary location, and by doing so prepend to them
 # future_fstrings coding
@@ -160,7 +163,7 @@ html_theme = 'default'
 # html_logo = None
 
 # The name of an image file (relative to this directory) to use as a favicon of
-# the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+# the docs. This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
 #
 # html_favicon = None
@@ -354,5 +357,5 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-#intersphinx_mapping = {'https://docs.python.org/': None}
+# intersphinx_mapping = {'https://docs.python.org/': None}
 # We've already set this in global_conf. Don't set it here
