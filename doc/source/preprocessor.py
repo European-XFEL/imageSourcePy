@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 import sys
 
 
@@ -22,11 +23,11 @@ def has_future_fstrings():
     try:
         import future_fstrings
         return True
-    except ModuleNotFoundError:
+    except ImportError:
         return False
 
 
-def add_ffstrings_encoding(src, dst):
+def preprocess(src, dst):
     """
     This function will copy recursively Python files from <src> to <dst>.
     The "future_fstrings" coding will be prepended to the files, if needed.
@@ -58,12 +59,18 @@ def add_ffstrings_encoding(src, dst):
 
             with open(src_file) as f1, open(dst_file, mode='w') as f2:
                 content = f1.read()
+
                 if content and not has_fs:
                     # Only for non-empty files and if f-strings are unsupported
-                    f2.write("# -*- coding: future_fstrings -*-\n\n")
+                    f2.write("# -*- coding: future_fstrings -*-\n")
+                if "@KARABO_CLASSINFO" in content:
+                    # Mocking of decorators does not work (yet):
+                    # import it from global_conf, instead from karabo.core
+                    content = re.sub(" +KARABO_CLASSINFO,?", "", content)
+                    f2.write("from global_conf import KARABO_CLASSINFO\n")
                 f2.write(content)
 
 
 if __name__ == "__main__":
     # execute only if run as a script
-    add_ffstrings_encoding(*sys.argv[1:])
+    preprocess(*sys.argv[1:])
