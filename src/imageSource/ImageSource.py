@@ -4,6 +4,8 @@
 # Copyright (C) European XFEL GmbH Hamburg. All rights reserved.
 #############################################################################
 
+import threading
+
 from karabo.bound import (
     DaqDataType, Hash, ImageData, IMAGEDATA_ELEMENT, KARABO_CLASSINFO,
     NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema
@@ -28,6 +30,10 @@ class ImageSource(PythonDevice):
     The function 'signal_eos' will send an end-of-stream signal to both the
     output channels.
     """
+
+    def __init__(self, conf):
+        super().__init__(conf)
+        self.write_lock = threading.Lock()
 
     @staticmethod
     def expectedParameters(expected):
@@ -112,6 +118,7 @@ class ImageSource(PythonDevice):
         """
 
         def write_channel(node_key):
+            self.write_lock.acquire()
             image_data = ImageData(data)
             if binning:
                 image_data.setBinning(binning)
@@ -125,6 +132,7 @@ class ImageSource(PythonDevice):
                 image_data.setHeader(header)
             self.writeChannel(node_key, Hash("data.image", image_data),
                               timestamp)
+            self.write_lock.release()
 
         write_channel('output')
 
