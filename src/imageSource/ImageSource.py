@@ -118,7 +118,6 @@ class ImageSource(PythonDevice):
         """
 
         def write_channel(node_key):
-            self.write_lock.acquire()
             image_data = ImageData(data)
             if binning:
                 image_data.setBinning(binning)
@@ -132,14 +131,15 @@ class ImageSource(PythonDevice):
                 image_data.setHeader(header)
             self.writeChannel(node_key, Hash("data.image", image_data),
                               timestamp)
-            self.write_lock.release()
 
-        write_channel('output')
+        with self.write_lock:
+            write_channel('output')
 
-        # Reshaped image for DAQ
-        # NB DAQ wants shape in CImg order, eg (width, height)
-        data = data.reshape(*reversed(data.shape))
-        write_channel('daqOutput')
+            # Reshape image for DAQ
+            # NB DAQ wants shape in CImg order, eg (width, height)
+            data = data.reshape(*reversed(data.shape))
+
+            write_channel('daqOutput')
 
     def signal_eos(self):
         """
