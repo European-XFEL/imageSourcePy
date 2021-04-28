@@ -7,8 +7,9 @@
 import threading
 
 from karabo.bound import (
-    DaqDataType, Hash, ImageData, IMAGEDATA_ELEMENT, KARABO_CLASSINFO,
-    NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema
+    DaqDataType, Encoding, Hash, ImageData, IMAGEDATA_ELEMENT,
+    KARABO_CLASSINFO, NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema,
+    Types
 )
 
 
@@ -46,6 +47,10 @@ class ImageSource(PythonDevice):
 
             IMAGEDATA_ELEMENT(output_data).key("data.image")
             .displayedName("Image")
+            # Set initial dummy values for DAQ
+            .setDimensions([0, 0])
+            .setType(Types.UINT16)
+            .setEncoding(Encoding.UNDEFINED)
             .commit(),
 
             OUTPUT_CHANNEL(expected).key("output")
