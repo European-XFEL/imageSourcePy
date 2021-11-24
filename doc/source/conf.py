@@ -21,10 +21,7 @@ import os
 import subprocess
 import sys
 
-# XXX temporary use local rtd_conf
-sys.path.insert(0, os.path.abspath('rtd_conf_local'))
-import global_conf
-# from rtd_conf import global_conf
+from rtd_conf import global_conf
 
 # Copy source files to temporary location, and by doing so prepend to them
 # future_fstrings coding

@@ -1,5 +1,5 @@
 git+https://git.xfel.eu/gitlab/xfel-rtd/rtd-conf.git
-slumber==0.7.1
-traits==4.6.0
+slumber
+traits
 future-fstrings
 numpy
