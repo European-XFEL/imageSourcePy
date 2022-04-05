@@ -98,8 +98,8 @@ def unpack_mono_xx_p(in_buffer, bpp, lock=None):
         idx = bits // 8
         shift = bits % 8
 
-        unpacked[px] = ((packed[idx] | packed[idx + 1] << 8)
-                        >> shift) & mask
+        unpacked[px] = (
+            (packed[idx] | packed[idx + 1] << 8) >> shift) & mask
 
         bits += bpp
         px += 1
