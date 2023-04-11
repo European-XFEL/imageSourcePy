@@ -1,8 +1,9 @@
 #############################################################################
 # Author: parenti
 # Created on December 11, 2019, 12:02 PM
-# Copyright (C) European XFEL GmbH Hamburg. All rights reserved.
+# Copyright (C) European XFEL GmbH Schenefeld. All rights reserved.
 #############################################################################
+
 from karabo.common.scenemodel.api import (
     BoxLayoutModel, DisplayCommandModel, DisplayLabelModel,
     DisplayStateColorModel, DoubleLineEditModel, EvaluatorModel,
