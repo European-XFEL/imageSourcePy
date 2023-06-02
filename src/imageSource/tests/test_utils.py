@@ -5,8 +5,7 @@ import unittest
 import numpy as np
 
 from ..utils import (
-    unpack_mono_xx_p, unpack_mono10_p, unpack_mono12_p, unpack_mono12_packed
-)
+    unpack_mono10_p, unpack_mono12_p, unpack_mono12_packed, unpack_mono_xx_p)
 
 
 class Utils_TestCase(unittest.TestCase):

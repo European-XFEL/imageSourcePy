@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 from os.path import dirname
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 
 def _get_version_string():

@@ -3,6 +3,7 @@
 import unittest
 
 from karabo.bound import Configurator, Hash, PythonDevice
+
 from ..CameraImageSource import CameraImageSource
 from ..ImageSource import ImageSource
 
