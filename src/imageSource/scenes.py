@@ -6,9 +6,8 @@
 
 from karabo.common.scenemodel.api import (
     BoxLayoutModel, DisplayCommandModel, DisplayLabelModel,
-    DisplayStateColorModel, DoubleLineEditModel, EvaluatorModel,
-    LabelModel, LineModel, SceneModel, WebCamGraphModel, write_scene
-)
+    DisplayStateColorModel, DoubleLineEditModel, EvaluatorModel, LabelModel,
+    LineModel, SceneModel, WebCamGraphModel, write_scene)
 
 
 def get_scene(deviceId):

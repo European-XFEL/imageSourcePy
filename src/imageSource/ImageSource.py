@@ -7,10 +7,8 @@
 import threading
 
 from karabo.bound import (
-    DaqDataType, Encoding, Hash, ImageData, IMAGEDATA_ELEMENT,
-    KARABO_CLASSINFO, NODE_ELEMENT, OUTPUT_CHANNEL, PythonDevice, Schema,
-    Types
-)
+    IMAGEDATA_ELEMENT, KARABO_CLASSINFO, NODE_ELEMENT, OUTPUT_CHANNEL,
+    DaqDataType, Encoding, Hash, ImageData, PythonDevice, Schema, Types)
 
 
 @KARABO_CLASSINFO("ImageSource", "2.7")

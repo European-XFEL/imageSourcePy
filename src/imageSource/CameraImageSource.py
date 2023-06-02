@@ -4,9 +4,7 @@
 # Copyright (C) European XFEL GmbH Schenefeld. All rights reserved.
 #############################################################################
 
-from karabo.bound import (
-    Hash, KARABO_CLASSINFO, VECTOR_STRING_ELEMENT
-)
+from karabo.bound import KARABO_CLASSINFO, VECTOR_STRING_ELEMENT, Hash
 from karabo.common.api import KARABO_SCHEMA_DISPLAY_TYPE_SCENES as DT_SCENES
 
 from .ImageSource import ImageSource
